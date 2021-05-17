@@ -1,0 +1,59 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class Activity {
+	String string1;
+	String string2;
+	String operator;
+
+//Constructor to intialize the class variables.
+	public Activity(String string1, String string2, String operator) {
+		this.string1 = string1;
+		this.string2 = string2;
+		this.operator = operator;
+	}
+}
+
+public class Source {
+
+	// Implement the two function given in the derscription here....
+	public String handleException(Activity a) {
+		String msg = "No Exception Found";
+		try {
+			if (a.string1 == null || a.string2 == null) {
+				throw new NullPointerException();
+			}
+			if (!a.operator.equals("+") && !a.operator.equals("-")) {
+				throw new Exception(a.operator);
+			}
+		} catch (NullPointerException ne) {
+			msg = "Null values found";
+		} catch (Exception e) {
+			msg = a.operator;
+		}
+		return msg;
+	}// :implement try-catch blocks and throws different exceptionsas described under
+		// tasks
+
+	public String doOperation(Activity a) {
+		String returnStr = null;
+		switch (a.operator.charAt(0)) {
+		case '+':
+			returnStr = a.string1 + a.string2;
+			break;
+		case '-':
+			returnStr = a.string1.replace(a.string2, "");
+		}
+		return returnStr;
+	}
+	// :implement switch statement to calculate Result based on value of operator
+
+	public static void main(String args[]) throws Exception {
+		Source s = new Source();
+		Activity a = new Activity("helloworldworld", "world", "-");
+		System.out.println(s.doOperation(a));
+	}
+}

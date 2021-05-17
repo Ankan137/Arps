@@ -1,0 +1,108 @@
+import java.util.*;
+import java.util.regex.*;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.io.*;
+import java.text.*;
+import java.math.*;
+class Email {
+	Header header;
+	String body;
+	String greetings;
+	
+	public Email(Header header, String body, String greetings) {
+		super();
+		this.header = header;
+		this.body = body;
+		this.greetings = greetings;
+	}
+	
+}
+
+class Header {
+	String from;
+	String to;
+
+	public Header(String from, String to) {
+		super();
+		this.from = from;
+		this.to = to;
+	}
+
+	
+}
+
+class EmailOperations {
+		public int emailVerify(Email e){
+
+		String regex = "^[a-zA-Z_]+@[a-zA-Z]+\\.[a-zA-Z]{2,4}+$";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(e.header.from);
+		Matcher m1 = p.matcher(e.header.to);
+		System.out.println(m.matches());
+		System.out.println(m1.matches());
+		if(m.matches() && m1.matches())
+		{
+			return 2;
+		}
+		else if(m.matches()|| m1.matches())
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public String bodyEncryption(Email e)
+	{
+		String s ="";
+		int l = e.body.length();
+		for(int i= 0;i<l;i++)
+		{
+			if(e.body.charAt(i)>='A' && e.body.charAt(i)<='W' || e.body.charAt(i)>='a' && e.body.charAt(i)<='w')
+			{
+				s = s + (char)(e.body.charAt(i) + 3);
+			}
+			else
+			{
+				switch(e.body.charAt(i))
+				{
+				case 'x' : s = s + 'a';
+				         break;
+				case 'y' : s = s + 'b';
+		                 break;
+				case 'z' : s = s + 'c';
+		                 break;
+				case 'X' : s = s + 'A';
+		                 break;
+				case 'Y' : s = s + 'B';
+		                 break;
+				case 'Z' : s = s + 'C';
+		                 break;
+		        default : s = s + " ";
+		                  break;
+				}
+			}
+					}
+		return s;
+	}
+	
+	public String greetingMessage(Email e) {
+		String msg = "";
+		for(int i =0;i < e.header.from.length(); i++) {
+			if(e.header.from.charAt(i) == '@') {
+				break;
+			}
+			else {
+				msg += e.header.from.charAt(i);
+			}	
+		}
+		return e.greetings+" "+msg;
+	}
+}
+public class Source {
+	public static void main(String args[]) throws Exception {
+		}
+}

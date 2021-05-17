@@ -1,0 +1,39 @@
+import java.util.*;
+class ArrayListOps {
+	
+  public ArrayList<Integer> makeArrayListInt(int n){
+	  ArrayList<Integer> list=new ArrayList<Integer>();
+	  for(int i=0;i<n;i++){
+		  list.add(0);
+	  }
+    return list;
+} 
+//: Method to create an arrayList with same number of elements as n and set elements to 0
+
+  public ArrayList<Integer> reverseList(ArrayList<Integer> list){
+     for(int i=0;i<list.size();i++){
+		  list.get(i);
+	  }
+	 
+    Collections.reverse(list);
+
+	 return list;
+	}
+
+	
+  public ArrayList<Integer> changeList(ArrayList<Integer> list, int m, int n){
+      for(int i=0;i<list.size();i++){
+		  if(list.get(i)==m){
+			  list.set(i,n);
+		  }
+	  }
+
+	  return list;
+
+  }//: Method to change all occurences of m to n in list
+
+}
+public class Source{
+	public static void main(String[] args) {
+	}
+}

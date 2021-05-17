@@ -1,0 +1,66 @@
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.Stream;
+class Employee {
+    private String name;
+    private int salary;
+    
+    public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+    public Employee(String name, int salary){
+        super();
+        this.name = name;
+        this.salary = salary;
+    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("<");
+        sb.append("name: ");
+        sb.append(name);
+        sb.append(" salary: ");
+        sb.append("" + salary+">");
+        return sb.toString();
+
+    }
+}
+class EmployeeInfo{
+    enum SortMethod {BYNAME,BYSALARY
+    };
+    public List<Employee> sort(List<Employee> emps, final SortMethod method){
+        if(method == SortMethod.BYNAME){
+            Collections.sort(emps,(e1,e2) ->(e1.getName().compareTo(e2.getName())));
+        }
+        else {
+        	Collections.sort(emps,(e1,e2) ->{
+                if(e1.getSalary() == (e2.getSalary())){
+                    return (e1.getName().compareTo(e2.getName()));
+                }
+                else{
+                     return e1.getSalary()-(e2.getSalary());
+                }
+                });
+        }
+        return emps;
+    }
+
+    public boolean isCharacterPresentInAllNames(Collection<Employee> entities, String character){
+        boolean flag = true;
+        for(Employee emp: entities) {
+        	if(!(emp.getName().contains(character))) {
+        		flag = false;
+        	}
+        }
+        return flag;
+    }
+}
